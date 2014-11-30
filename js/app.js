@@ -14,6 +14,10 @@ todoTrip.config(['$routeProvider',
                 templateUrl: 'template/maps.html',
                 controller: 'mapController'
             }).
+            when('/information', {
+                templateUrl: 'template/information.html',
+                controller: 'informationController'
+            }).
             otherwise({
                 redirectTo: '/maps'
             });
