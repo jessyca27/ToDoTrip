@@ -1,0 +1,15 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Saison</label>
+                <!--
+                    ng-model : Définit la valeur par défaut
+                    ng-options : Définit le système d'affichage
+                        On affiche saison.name qui ce trouve dans saisons et on assigne les valeurs en fonction de saison.value
+                -->
+                <select ng-model="mySaison" ng-options="saison.name for saison in saisons track by saison.value"></select>
+            </div>
+        </div>
+    </div>
+</div>
