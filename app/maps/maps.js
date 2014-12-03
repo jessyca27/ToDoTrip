@@ -9,7 +9,7 @@ angular.module('todoTrip.maps', ['ngRoute'])
   });
 }])
 
-.controller('MapsCtrl', [function() {
+.controller('MapsCtrl', ['$window', function($window) {
         $('#francemap').vectorMap({
             map: 'france_fr',
             hoverOpacity: 0.5,
@@ -19,7 +19,7 @@ angular.module('todoTrip.maps', ['ngRoute'])
             borderColor: "#000000",
             selectedColor: "#EC0000",
             enableZoom: true,
-            showTooltip: true,
+            //showTooltip: true,
             onRegionClick: function(element, code, region)
             {
                 var message = 'Région : "'
@@ -27,8 +27,7 @@ angular.module('todoTrip.maps', ['ngRoute'])
                     + '" || Id : "'
                     + code
                     + '"';
-
-                alert(message);
+                $window.location.href = '#/information/'+code;
             }
         });
 }]);
