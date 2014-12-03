@@ -3,17 +3,18 @@
 var todotripApp = angular.module('todoTrip.information', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/information', {
+  $routeProvider.when('/information/:idRegion', {
     templateUrl: 'information/information.html',
     controller: 'InformationCtrl'
   });
 }])
 
-todotripApp.controller('InformationCtrl', ['$scope', function($scope) {
+.controller('InformationCtrl', ['$scope', function($scope) {
+	$("#ok").click(function(){	//Permet d'afficher les listes quand la saison a été choisie
+	   $("#listes").show();
+	});
 
-$("#ok").click(function(){
-   $("#listes").show();
-});
+        $(".jqvmap-label").remove(); // Supprime le tooltip qui restait lorsque l'on change de page
         //Ajout des différentes saisons
         $scope.saisons = [
             {name : 'Printemps', value : 'printemps'},
@@ -57,3 +58,10 @@ todotripApp.controller('ToiletriesListCtrl', function($scope) {
   ];
 $scope.orderProp = 'name';
 });
+=======
+
+        $("#test").click(function(){
+           $("#test_div").show();
+        });
+}]);
+>>>>>>> 23d9388fd122accbf63f45638ad9a1dde5d2b1ef
