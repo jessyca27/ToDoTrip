@@ -50,6 +50,19 @@ npm start
 
 Vous pouver voir l'application à l'adresse : `http://localhost:8000/app/index.html`.
 
+## Idée d'amélioration
+
+### Téléchargement de la liste en PDF
+
+https://github.com/MrRio/jsPDF
+
+### Ajout d'une base de données
+
+https://www.iriscouch.com/
+
+### A définir
+
+
 ## Contact
 
 For more information on AngularJS please check out http://angularjs.org/
