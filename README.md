@@ -9,8 +9,8 @@ Pour commencer à utiliser ToDoTrip, il faut simplement cloner ce repository
 ### Pré-requis
 
 Logiciel : 
-    - Git : [http://git-scm.com/](http://git-scm.com/).
-    - NodeJS : [http://nodejs.org/](http://nodejs.org/) avec NPM.
+* Git : [http://git-scm.com/](http://git-scm.com/).
+* NodeJS : [http://nodejs.org/](http://nodejs.org/) avec NPM.
 
 ### Cloner ToDoTrip
 
