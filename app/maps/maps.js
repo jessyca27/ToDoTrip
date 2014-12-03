@@ -10,5 +10,25 @@ angular.module('todoTrip.maps', ['ngRoute'])
 }])
 
 .controller('MapsCtrl', [function() {
+        $('#francemap').vectorMap({
+            map: 'france_fr',
+            hoverOpacity: 0.5,
+            hoverColor: "#EC0000",
+            backgroundColor: "#ffffff",
+            color: "#FACC2E",
+            borderColor: "#000000",
+            selectedColor: "#EC0000",
+            enableZoom: true,
+            showTooltip: true,
+            onRegionClick: function(element, code, region)
+            {
+                var message = 'Région : "'
+                    + region
+                    + '" || Id : "'
+                    + code
+                    + '"';
 
+                alert(message);
+            }
+        });
 }]);
