@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('todoTrip.information', ['ngRoute'])
+var todotripApp = angular.module('todoTrip.information', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/information', {
@@ -9,7 +9,11 @@ angular.module('todoTrip.information', ['ngRoute'])
   });
 }])
 
-.controller('InformationCtrl', ['$scope', function($scope) {
+todotripApp.controller('InformationCtrl', ['$scope', function($scope) {
+
+$("#ok").click(function(){
+   $("#listes").show();
+});
         //Ajout des différentes saisons
         $scope.saisons = [
             {name : 'Printemps', value : 'printemps'},
@@ -29,3 +33,27 @@ angular.module('todoTrip.information', ['ngRoute'])
         //Définit un hébergement par défaut
         $scope.myTypeHebergements = $scope.typeHebergements[0];
 }]);
+
+
+todotripApp.controller('ToiletriesListCtrl', function($scope) {
+  $scope.elements = [
+    {'name': 'Serviette de bain', 'value':false},
+    {'name': 'Gel douche', 'value':false},
+    {'name': 'Shampoing', 'value':false},
+    {'name': 'Dentifrice', 'value':false},
+    {'name': 'Brosse à dent', 'value':false},
+    {'name': 'Brosse à cheveux', 'value':false},
+    {'name': 'Maquillage', 'value':false},
+    {'name': 'Sèche cheveux', 'value':false},
+    {'name': 'Rasoir', 'value':false},
+    {'name': 'Mousse à raser', 'value':false},
+    {'name': 'Déodorant', 'value':false},
+    {'name': 'Coupe ongle', 'value':false},
+    {'name': 'Pince à épiler', 'value':false},
+    {'name': 'Gants de toilette', 'value':false},
+    {'name': 'Démaquillant', 'value':false},
+    {'name': 'Disque démaquillant', 'value':false},
+    {'name': 'Crème solaire', 'value':false},
+  ];
+$scope.orderProp = 'name';
+});

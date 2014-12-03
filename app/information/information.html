@@ -9,6 +9,54 @@
                         On affiche saison.name qui ce trouve dans saisons et on assigne les valeurs en fonction de saison.value
                 -->
                 <select ng-model="mySaison" ng-options="saison.name for saison in saisons track by saison.value"></select>
+		<input type="button" name="ok" id="ok" value="OK" class="btn-primary"/>
+<br/>
+
+<div style="display: none;" id="listes">
+	<table>
+		<tr>
+			<th><h3>TROUSSE DE TOILETTE</h3></th>
+			<th><h3>VETEMENTS</h3></th>
+		</tr>
+		<tr>
+			<td>Search: <input ng-model="trousse"></td>
+			<td>Search: <input ng-model="vetements"></td>
+		</tr>
+		<tr>
+			<td>
+				<form name="myForm" ng-controller="ToiletriesListCtrl">
+				<!--Tout cocher : <input type="checkbox" ng-model="cocher"><br/>-->
+				<ul>
+					<li ng-repeat="element in elements | filter:trousse | orderBy:orderProp">
+						<input type="checkbox" ng-checked="cocher" ng-model="element.value"> {{element.name}} 
+					</li>
+				</ul>
+				</form>
+			</td>
+			<td>
+				<!-- LISTE VETEMENTS-->
+
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="text" id="add"></input><button type="button" class="btn-success">Ajouter</button></br>
+				<button type="button" class="btn-danger">Supprimer</button>
+				<button type="button" class="btn-info">Enregistrer</button>
+			</td>
+			<td>
+				<input type="text" id="add"></input><button type="button" class="btn-success">Ajouter</button></br>
+				<button type="button" class="btn-danger">Supprimer</button>
+				<button type="button" class="btn-info">Enregistrer</button>
+			</td>
+		</tr>
+	</table>
+</div>
+
+
+
+	
+
             </div>
         </div>
     </div>

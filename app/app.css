@@ -28,3 +28,36 @@
   content: "";
   padding: 0;
 }
+
+body {
+	background-color: #dcf6ff;
+}
+#logo {
+	background-image: url("img/logo.png");
+	width: 327px;
+	height: 50px;
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+ul li {
+	list-style-type:none;
+}
+table {
+	width: 100%;
+}
+table td {
+	width: 50%;
+}
+#listes {
+	width: 90%;
+	margin: auto;
+}
+h3 {
+	color: #1369f8;
+	font-family: 'Gabriela', serif;
+	letter-spacing: .10em;
+	text-shadow:
+		1px -1px 0 #1369f8,
+		-5px 10px 1px #bfd6fd,
+		-6px 12px 1px #dce9fe;
+}
