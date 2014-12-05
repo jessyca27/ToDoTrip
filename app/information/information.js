@@ -9,11 +9,44 @@ var todotripApp = angular.module('todoTrip.information', ['ngRoute'])
   });
 }])
 
-.controller('InformationCtrl', ['$scope', function($scope) {
+.controller('InformationCtrl', ['$scope', '$routeParams', function($scope, $routeParams) {
 	$("#ok").click(function(){	//Permet d'afficher les listes quand la saison a été choisie
 	   $("#listes").show();
 	});
-
+	
+	$scope.regions = [
+        {id : 1, name : "Picardie"},
+		{id : 2, name : "Haute-Normandie"},
+		{id : 3, name : "Basse-Normandie"},
+		{id : 4, name : "Île-de-France"},
+		{id : 5, name : "Bretagne"},
+		{id : 6, name : "Champagne-Ardenne"},
+		{id : 7, name : "Alsace"},
+		{id : 8, name : "Pays de la Loire"},
+		{id : 9, name : "Centre"},
+		{id : 10, name : "Bourgogne"},
+		{id : 11, name : "Rhône-Alpes"},
+		{id : 12, name : "Aquitaine"},
+		{id : 13, name : "Provence-Alpes-Côte d'Azur"},
+		{id : 14, name : "Corse"},
+		{id : 15, name : "Midi-Pyrénées"},
+		{id : 16, name : "Languedoc-Roussillon"},
+		{id : 17, name : "Lorraine"},
+		{id : 18, name : "Poitou-Charentes"},
+		{id : 19, name : "Limousin"},
+		{id : 20, name : "Auvergne"},
+		{id : 21, name : "Nord-Pas-de-Calais"},
+        {id : 22, name : "Franche-Comté"}
+    ];
+	
+	$scope.nameRegion = "";
+	//if($scope.regions.isArray($routeParams.idRegion))
+	$scope.regions.forEach(function(item) {
+		if($routeParams.idRegion == item.id)
+		{
+			$scope.nameRegion = "Valise pour " + item.name;
+		}
+	});
     $(".jqvmap-label").remove(); // Supprime le tooltip qui restait lorsque l'on change de page
     //Ajout des différentes saisons
     $scope.saisons = [
@@ -33,7 +66,6 @@ var todotripApp = angular.module('todoTrip.information', ['ngRoute'])
     ];
     //Définit un hébergement par défaut
     $scope.myTypeHebergements = $scope.typeHebergements[0];
-
 
     $scope.elements = [
         {name : 'Serviette de bain', value : false},

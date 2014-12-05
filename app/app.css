@@ -34,8 +34,8 @@ body {
 }
 #logo {
 	background-image: url("img/logo.png");
-	width: 327px;
-	height: 50px;
+	width: 490px;
+	height: 75px;
 	margin-top: 0;
 	margin-bottom: 20px;
 }
@@ -52,7 +52,7 @@ table td {
 	width: 90%;
 	margin: auto;
 }
-h3 {
+h2 {
 	color: #1369f8;
 	font-family: 'Gabriela', serif;
 	letter-spacing: .10em;
@@ -60,4 +60,18 @@ h3 {
 		1px -1px 0 #1369f8,
 		-5px 10px 1px #bfd6fd,
 		-6px 12px 1px #dce9fe;
+}
+.btn-danger {
+	margin-top: 2px;
+}
+h1 {
+	text-align: center;
+	font-family: 'Raleway', sans-serif;
+}
+#textPresentation {
+	color: grey;
+	text-align: left;
+	text-align: justify;
+	font-family: 'Raleway', sans-serif;
+	font-size: 1.5em;
 }

@@ -1,6 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
+		<h1>{{ nameRegion }}</h1>
             <div class="form-group">
                 <label>Saison</label>
                 <!--
@@ -9,28 +10,49 @@
                         On affiche saison.name qui ce trouve dans saisons et on assigne les valeurs en fonction de saison.value
                 -->
                 <select ng-model="mySaison" ng-options="saison.name for saison in saisons track by saison.value"></select>
-		        <input type="button" name="ok" id="ok" value="OK" class="btn btn-primary"/>
+		        <button type="button" name="ok" id="ok"class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span></button>
 
             </div>
         </div>
     </div>
     <div class="row" style="display: none;" id="listes">
         <div class="col-md-6">
-            <h3>Trousse de toilette</h3>
-            Search: <input ng-model="trousse">
+            <h2>Trousse de toilette</h2>
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label for="inputPassword" class="col-sm-1 control-label"><span class="glyphicon glyphicon-search"></span></label>
+					<div class="col-sm-3">
+						<input class="form-control" ng-model="trousse">
+					</div>
+				</div>
+			</form>
             <ul>
-                <li ng-repeat="element in elements track by $index | filter:trousse | orderBy:orderProp">
-                    <input type="checkbox" ng-checked="cocher" ng-model="element.value"> {{element.name}} <button ng-click="supr(elements, $index)">Supr</button>
+                <li ng-repeat="element in elements  | filter:trousse track by $index | orderBy:orderProp">
+                    <button class="btn btn-danger" ng-click="supr(elements, $index)"><span class="glyphicon glyphicon-trash"></span></button> {{element.name}} 
                 </li>
             </ul>
-            <input type="text" id="add" ng-model="itemName"></input>
-            <button ng-click="addItem(elements)" class="btn btn-success">Ajouter</button></br>
-            <button type="button" class="btn btn-danger">Supprimer</button>
-            <button type="button" class="btn btn-info">Enregistrer</button>
+			
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-3">
+						<input type="text" id="add"  class="form-control"  ng-model="itemName"></input>
+					</div>
+					<button ng-click="addItem(elements)" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
+				</div>
+			</form>
         </div>
+		
+		
         <div class="col-md-6">
-            <h3>Vetements</h3>
-            Search: <input ng-model="vetements">
+            <h2>Vêtements</h2>
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label for="inputPassword" class="col-sm-1 control-label"><span class="glyphicon glyphicon-search"></span></label>
+					<div class="col-sm-3">
+						<input class="form-control" ng-model="vetements">
+					</div>
+				</div>
+			</form>
         </div>
     </div>
 </div>
