@@ -9,75 +9,59 @@ var todotripApp = angular.module('todoTrip.information', ['ngRoute'])
   });
 }])
 
-.controller('InformationCtrl', ['$scope', function($scope) {
-	$("#ok").click(function(){	//Permet d'afficher les listes quand la saison a été choisie
-	   $("#listes").show();
-	});
+.controller('InformationCtrl', function($scope, filterFilter, $http, $location){
+    $scope.clothesList = [];
+    $scope.toiletriesList = [];
 
-    $(".jqvmap-label").remove(); // Supprime le tooltip qui restait lorsque l'on change de page
-    //Ajout des différentes saisons
-    $scope.saisons = [
-        {name : 'Printemps', value : 'printemps'},
-        {name : 'Été', value : 'ete'},
-        {name : 'Automne', value : 'automne'},
-        {name : 'Hiver', value : 'hiver'}
-    ];
-    //Définit la saison par défaut
-    $scope.mySaison = $scope.saisons[0];
-    //Ajout des différents type d'hébergements
-    $scope.typeHebergements = [
-        {name : "Tente", value : "tente"},
-        {name : "Camping-Car", value : "campingCar"},
-        {name : "Mobile-Home", value : "mobileHome"},
-        {name : "Appartement", value : "appartement"}
-    ];
-    //Définit un hébergement par défaut
-    $scope.myTypeHebergements = $scope.typeHebergements[0];
+    $http.get('information/clothes.json').success(function(data){
+        $scope.clothesList = data;
+        $scope.placeholder = "Nouvel élément";
+    });
 
+    $http.get('information/vanityCase.json').success(function (data) {
+        $scope.toiletriesList = data;
+        $scope.placeholder = "Nouvel élément";
+    });
 
-    $scope.elements = [
-        {name : 'Serviette de bain', value : false},
-        {name : 'Gel douche', value : false},
-        {name : 'Shampoing', value : false},
-        {name : 'Dentifrice', value : false},
-        {name : 'Brosse à dent', value : false},
-        {name : 'Brosse à cheveux', value : false},
-        {name : 'Maquillage', value : false},
-        {name : 'Sèche cheveux', value : false},
-        {name : 'Rasoir', value : false},
-        {name : 'Mousse à raser', value : false},
-        {name : 'Déodorant', value : false},
-        {name : 'Coupe ongle', value : false},
-        {name : 'Pince à épiler', value : false},
-        {name : 'Gants de toilette', value : false},
-        {name : 'Démaquillant', value : false},
-        {name : 'Disque démaquillant', value : false},
-        {name : 'Crème solaire', value : false},
-    ];
-    $scope.orderProp = 'name';
+    $scope.$watch('clothesList', function(){
+        $scope.remainingClothes = filterFilter($scope.clothesList, {completed:false}).length;
+    }, true);
 
+    $scope.$watch('toiletriesList', function(){
+        $scope.remainingToiletries = filterFilter($scope.toiletriesList, {completed:false}).length;
+    }, true);
 
-    // Ajouter des élément à la liste définit par array
-    $scope.addItem = function (array) {
-        array.push({
-            name: $scope.itemName
+    $scope.removeClothe = function(index){
+        $scope.clothesList.splice(index,1);
+    };
+
+    $scope.removeToiletrie = function(index){
+        $scope.toiletriesList.splice(index,1);
+    };
+
+    $scope.addClothe = function(){
+        $scope.clothesList.push({
+            name : $scope.newClothe,
+            completed : false
         });
-        // Clear input fields after push
-        $scope.itemName = "";
+        $scope.newClothe = null;
+        return false;
     };
 
-    // Supprimer un élément de la liste définit par array
-    $scope.supr = function (array, index) {
-        array.splice(index, 1);
+    $scope.addToiletrie = function(){
+        $scope.toiletriesList.push({
+            name : $scope.newToiletrie,
+            completed : false
+        });
+        $scope.newToiletrie = null;
+        return false;
     };
 
-    /*$scope.remove = function(subtask) {
-        var idx = $scope.element.indexOf(subtask);
-        var st = $scope.elements.element[idx];
-        // remove from DB
-        SubTask.remove({'subtaskId': element.id});
-        // remove from local array
-        $scope.elements.splice(idx,1)
-    };*/
+    $scope.editClothe = function(clothe){
+        clothe.editing = false;
+    };
 
-}]);
+    $scope.editToiletrie = function(toiletrie){
+        toiletrie.editing = false;
+    };
+});
