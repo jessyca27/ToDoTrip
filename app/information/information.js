@@ -2,66 +2,69 @@
 
 var todotripApp = angular.module('todoTrip.information', ['ngRoute'])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/information/:idRegion', {
-    templateUrl: 'information/information.html',
-    controller: 'InformationCtrl'
-  });
-}])
-
-.controller('InformationCtrl', function($scope, filterFilter, $http, $location){
-    $scope.clothesList = [];
-    $scope.toiletriesList = [];
-
-    $http.get('information/clothes.json').success(function(data){
-        $scope.clothesList = data;
-        $scope.placeholder = "Nouvel élément";
-    });
-
-    $http.get('information/vanityCase.json').success(function (data) {
-        $scope.toiletriesList = data;
-        $scope.placeholder = "Nouvel élément";
-    });
-
-    $scope.$watch('clothesList', function(){
-        $scope.remainingClothes = filterFilter($scope.clothesList, {completed:false}).length;
-    }, true);
-
-    $scope.$watch('toiletriesList', function(){
-        $scope.remainingToiletries = filterFilter($scope.toiletriesList, {completed:false}).length;
-    }, true);
-
-    $scope.removeClothe = function(index){
-        $scope.clothesList.splice(index,1);
-    };
-
-    $scope.removeToiletrie = function(index){
-        $scope.toiletriesList.splice(index,1);
-    };
-
-    $scope.addClothe = function(){
-        $scope.clothesList.push({
-            name : $scope.newClothe,
-            completed : false
+    .config(['$routeProvider', function($routeProvider) {
+        $routeProvider.when('/information/:idRegion', {
+            templateUrl: 'information/information.html',
+            controller: 'InformationCtrl'
         });
-        $scope.newClothe = null;
-        return false;
-    };
+    }])
 
-    $scope.addToiletrie = function(){
-        $scope.toiletriesList.push({
-            name : $scope.newToiletrie,
-            completed : false
+    .controller('InformationCtrl', function($scope, filterFilter, $http, $routeParams){
+        $(".jqvmap-label").remove(); // Supprime le tooltip qui restait lorsque l'on change de page
+
+        $scope.idRegion = $routeParams.idRegion;
+
+        $scope.clothesList = [];
+        $scope.toiletriesList = [];
+        $scope.placeholder = "Nouvel élément";
+
+        $http.get('data/clothes.json').success(function(data){
+            $scope.clothesList = data;
         });
-        $scope.newToiletrie = null;
-        return false;
-    };
 
-    $scope.editClothe = function(clothe){
-        clothe.editing = false;
-    };
+        $http.get('data/vanityCase.json').success(function (data) {
+            $scope.toiletriesList = data;
+        });
 
-    $scope.editToiletrie = function(toiletrie){
-        toiletrie.editing = false;
-    };
-});
+        $scope.$watch('clothesList', function(){
+            $scope.remainingClothes = filterFilter($scope.clothesList, {completed:false}).length;
+        }, true);
+
+        $scope.$watch('toiletriesList', function(){
+            $scope.remainingToiletries = filterFilter($scope.toiletriesList, {completed:false}).length;
+        }, true);
+
+        $scope.removeClothe = function(index){
+            $scope.clothesList.splice(index,1);
+        };
+
+        $scope.removeToiletrie = function(index){
+            $scope.toiletriesList.splice(index,1);
+        };
+
+        $scope.addClothe = function(){
+            $scope.clothesList.push({
+                name : $scope.newClothe,
+                completed : false
+            });
+            $scope.newClothe = null;
+            return false;
+        };
+
+        $scope.addToiletrie = function(){
+            $scope.toiletriesList.push({
+                name : $scope.newToiletrie,
+                completed : false
+            });
+            $scope.newToiletrie = null;
+            return false;
+        };
+
+        $scope.editClothe = function(clothe){
+            clothe.editing = false;
+        };
+
+        $scope.editToiletrie = function(toiletrie){
+            toiletrie.editing = false;
+        };
+    });
