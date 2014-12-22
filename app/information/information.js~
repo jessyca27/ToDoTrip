@@ -2,174 +2,85 @@
 
 var todotripApp = angular.module('todoTrip.information', ['ngRoute'])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/information/:idRegion', {
-    templateUrl: 'information/information.html',
-    controller: 'InformationCtrl'
-  });
-}])
-
-.controller('InformationCtrl', ['$scope', '$http', '$location', 'filterFilter', function($scope, $http, $location, filterFilter) {
-	$("#ok").click(function(){	//Permet d'afficher les listes quand la saison a été choisie
-	   $("#listes").show();
-	});
-
-    $(".jqvmap-label").remove(); // Supprime le tooltip qui restait lorsque l'on change de page
-    //Ajout des différentes saisons
-    $scope.saisons = [
-        {name : 'Printemps', value : 'printemps'},
-        {name : 'Été', value : 'ete'},
-        {name : 'Automne', value : 'automne'},
-        {name : 'Hiver', value : 'hiver'}
-    ];
-    //Définit la saison par défaut
-    $scope.mySaison = $scope.saisons[0];
-    //Ajout des différents type d'hébergements
-    $scope.typeHebergements = [
-        {name : "Tente", value : "tente"},
-        {name : "Camping-Car", value : "campingCar"},
-        {name : "Mobile-Home", value : "mobileHome"},
-        {name : "Appartement", value : "appartement"}
-    ];
-    //Définit un hébergement par défaut
-    $scope.myTypeHebergements = $scope.typeHebergements[0];
-
-
-    $scope.elements = [];
-		
-	$http.get('vanityCase.json').success(function(data){
-		$scope.elements = data;
-		$scope.placeholder = "Nouvel élément";
-	});
-	
-    $scope.orderProp = 'name';
-
-
-    // Ajouter des élément à la liste définit par array
-    $scope.addItem = function (array) {
-        array.push({
-            name: $scope.itemName
+    .config(['$routeProvider', function($routeProvider) {
+        $routeProvider.when('/information/:idRegion', {
+            templateUrl: 'information/information.html',
+            controller: 'InformationCtrl'
         });
-        // Clear input fields after push
-        $scope.itemName = "";
-    };
+    }])
 
-    // Supprimer un élément de la liste définit par array
-    $scope.supr = function (array, index) {
-        array.splice(index, 1);
-    };
+    .controller('InformationCtrl', function($scope, filterFilter, $http, $routeParams){
+        $(".jqvmap-label").remove(); // Supprime le tooltip qui restait lorsque l'on change de page
 
-    /*$scope.remove = function(subtask) {
-        var idx = $scope.element.indexOf(subtask);
-        var st = $scope.elements.element[idx];
-        // remove from DB
-        SubTask.remove({'subtaskId': element.id});
-        // remove from local array
-        $scope.elements.splice(idx,1)
-    };*/
+        $scope.idRegion = $routeParams.idRegion;
 
-$scope.todos = [];
+        $scope.clothesList = [];
+        $scope.toiletriesList = [];
+        $scope.placeholder = "Nouvel élément";
 
-	$http.get('information/clothes.json').success(function(data){
-		$scope.todos = data;
-		$scope.placeholder = "Nouvel élément";
-	});
+        $http.get('data/clothes.json').success(function(data){
+            $scope.clothesList = data;
+        });
 
-	$scope.$watch('todos', function(){
-		$scope.remaining = filterFilter($scope.todos, {completed:false}).length;
-		$scope.allchecked = !$scope.remaining;
-	}, true)
+        $http.get('data/vanityCase.json').success(function (data) {
+            $scope.toiletriesList = data;
+        });
 
-	if($location.path() == ''){ $location.path('/')}
-	$scope.location = $location;
-	$scope.$watch('location.path()', function(path){
-		$scope.statusFilter =
-			(path == '/active') ? {completed : false} :
-			(path == '/done') ? {completed : true} :
-			null;
-	});
+	$http.get('data/season.json').success(function (data) {
+            $scope.seasonsList = data;
+        });
 
+	$http.get('data/sexe.json').success(function (data) {
+            $scope.sexesList = data;
+        });
 
-	$scope.removeTodo = function(index){
-		$scope.todos.splice(index,1);
-	}
+        $scope.$watch('clothesList', function(){
+            $scope.remainingClothes = filterFilter($scope.clothesList, {completed:false}).length;
+        }, true);
 
-	$scope.addTodo = function(){
-		$scope.todos.push({
-			name : $scope.newtodo,
-			completed : false
-		});
-		$scope.newtodo = '';
-		return false;
-	}
+        $scope.$watch('toiletriesList', function(){
+            $scope.remainingToiletries = filterFilter($scope.toiletriesList, {completed:false}).length;
+        }, true);
 
-	$scope.editTodo = function(todo){
-		todo.editing = false;
-	}
+	$scope.$watch('seasonsList', function(){
+            $scope.remainingSasons = filterFilter($scope.seasonsList, {completed:false}).length;
+        }, true);
 
-	$scope.checkAllTodo = function(allchecked){
-		$scope.todos.forEach(function(todo){
-			todo.completed = allchecked;
-		})
-	}
+	$scope.$watch('sexesList', function(){
+            $scope.remainingSexes = filterFilter($scope.seasonsList, {completed:false}).length;
+        }, true);
 
-}]);
+        $scope.removeClothe = function(index){
+            $scope.clothesList.splice(index,1);
+        };
 
+        $scope.removeToiletrie = function(index){
+            $scope.toiletriesList.splice(index,1);
+        };
 
+        $scope.addClothe = function(){
+            $scope.clothesList.push({
+                name : $scope.newClothe,
+                completed : false
+            });
+            $scope.newClothe = null;
+            return false;
+        };
 
-/*app.directive('ngBlur', function(){
-	return function(scope, elem, attrs){
-		elem.bind('blur', function(){
-			scope.$apply(attrs.ngBlur);
-		})
-	}
-})*/
+        $scope.addToiletrie = function(){
+            $scope.toiletriesList.push({
+                name : $scope.newToiletrie,
+                completed : false
+            });
+            $scope.newToiletrie = null;
+            return false;
+        };
 
-/*app.controller('TodoCtrl', function($scope, filterFilter, $http, $location){
-	$scope.todos = [
-		{"name": "Tester la dÃ©mo", "completed":false},
-	];
+        $scope.editClothe = function(clothe){
+            clothe.editing = false;
+        };
 
-	$http.get('todo.json').success(function(data){
-		$scope.todos = data;
-		$scope.placeholder = "Nouvel élément";
-	});
-
-	$scope.$watch('todos', function(){
-		$scope.remaining = filterFilter($scope.todos, {completed:false}).length;
-		$scope.allchecked = !$scope.remaining;
-	}, true)
-
-	if($location.path() == ''){ $location.path('/')}
-	$scope.location = $location;
-	$scope.$watch('location.path()', function(path){
-		$scope.statusFilter =
-			(path == '/active') ? {completed : false} :
-			(path == '/done') ? {completed : true} :
-			null;
-	});
-
-
-	$scope.removeTodo = function(index){
-		$scope.todos.splice(index,1);
-	}
-
-	$scope.addTodo = function(){
-		$scope.todos.push({
-			name : $scope.newtodo,
-			completed : false
-		});
-		$scope.newtodo = '';
-		return false;
-	}
-
-	$scope.editTodo = function(todo){
-		todo.editing = false;
-	}
-
-	$scope.checkAllTodo = function(allchecked){
-		$scope.todos.forEach(function(todo){
-			todo.completed = allchecked;
-		})
-	}
-});*/
+        $scope.editToiletrie = function(toiletrie){
+            toiletrie.editing = false;
+        };
+    });

@@ -3,17 +3,31 @@
         <section id="todoapp">
             <h1>Vous avez besoin de... </h1>
 
+<div id="filtres">
+	<button ng-click="sexe = sexesList[0].name">Fille</button>
+	<button ng-click="sexe = sexesList[1].name">Garçon</button>
+	<button ng-click="sexe = null">Supprimer</button></br>
+	<span>{{sexe}}</span></br>
+
+	<button ng-click="seasonValue = seasonsList[0].name">Printemps</button>
+	<button ng-click="seasonValue = seasonsList[2].name">Eté</button>
+	<button ng-click="seasonValue = seasonsList[1].name">Automne</button>
+	<button ng-click="seasonValue = seasonsList[3].name">Hiver</button>
+	<button ng-click="seasonValue = null">Supprimer</button></br>
+	<span>{{seasonValue}}</span></br>
+</div>
             <div class="col-md-6">
                 <header class="header">
                     <h2>Liste de vêtements</h2>
+
                     <form class="todo-form" ng-submit="addClothe()">
-                        <input type="text" class="new-todo" placeholder="Ajouter un nouvel objet" autofocus autocomplete="off" ng-model="newClothe">
+             		<input type="text" class="new-todo" placeholder="Ajouter un nouvel objet" autofocus autocomplete="off" ng-model="newClothe">
                     </form>
                 </header>
 
                 <section class="main">
                     <ul class="todo-list">
-                        <li ng-repeat="clothe in clothesList | filter:clotheFilter" ng-class="{completed : clothe.completed, editing: clothe.editing}" ng-dblclick="clothe.editing = true">
+                        <li ng-repeat="clothe in clothesList | filter:clotheFilter | filter:seasonValue | filter:sexe" ng-class="{completed : clothe.completed, editing: clothe.editing}" ng-dblclick="clothe.editing = true">
                             <div class="view">
                                 <input type="checkbox" class="toggle" ng-model="clothe.completed">
                                 <label>{{clothe.name}}</label>
@@ -46,7 +60,7 @@
 
                 <section class="main">
                     <ul class="todo-list">
-                        <li ng-repeat="toiletrie in toiletriesList | filter:toiletrieFilter" ng-class="{completed : toiletrie.completed, editing: toiletrie.editing}" ng-dblclick="toiletrie.editing = true">
+                        <li ng-repeat="toiletrie in toiletriesList | filter:toiletrieFilter | filter:sexe" ng-class="{completed : toiletrie.completed, editing: toiletrie.editing}" ng-dblclick="toiletrie.editing = true">
                             <div class="view">
                                 <input type="checkbox" class="toggle" ng-model="toiletrie.completed">
                                 <label>{{toiletrie.name}}</label>

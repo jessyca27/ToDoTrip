@@ -1,116 +1,89 @@
 <div class="container-fluid">
-    <!--<div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label>Saison</label>
-                <!--
-                    ng-model : Définit la valeur par défaut
-                    ng-options : Définit le système d'affichage
-                        On affiche saison.name qui ce trouve dans saisons et on assigne les valeurs en fonction de saison.value
-                -->
-		<!--
-                <select ng-model="mySaison" ng-options="saison.name for saison in saisons track by saison.value"></select>
-		        <input type="button" name="ok" id="ok" value="OK" class="btn btn-primary"/>
+    <div class="row">
+        <section id="todoapp">
+            <h1>Vous avez besoin de... </h1>
 
-            </div>
-        </div>
-    </div>-->
-    <div class="row" id="listes"> <!-- style="display: none" pour rajouter la sélection avec saison -->
-       <div class="col-md-6">
-            <h3>Trousse de toilette</h3>
+<div id="Filtres">
+	<button ng-click="sexe = sexesList[0].name">Fille</button>
+	<button ng-click="sexe = sexesList[1].name">Garçon</button>
+	<button ng-click="sexe = null">Supprimer</button></br>
+	<span>{{sexe}}</span></br>
 
-	<section id="todoapp">
-		<div id="header">
-			<form id="todo-form" ng-submit="addTodo()">
-            <input type="text" id="new-todo" placeholder="Ajouter un nouvel objet..." autofocus autocomplete="off" ng-model="newtodo">
-          </form>
-        </div>
+	<button ng-click="seasonValue = seasonsList[0].name">Printemps</button>
+	<button ng-click="seasonValue = seasonsList[2].name">Eté</button>
+	<button ng-click="seasonValue = seasonsList[1].name">Automne</button>
+	<button ng-click="seasonValue = seasonsList[3].name">Hiver</button>
+	<button ng-click="seasonValue = null">Supprimer</button></br>
+	<span>{{seasonValue}}</span></br>
+</div>
+            <div class="col-md-6">
+                <header class="header">
+                    <h2>Liste de vêtements</h2>
 
-        <section id="main">
-          <input type="checkbox" id="toggle-all" ng-model="allchecked" ng-click="checkAllTodo(allchecked)">
-          <ul id="todo-list">
-           <li ng-repeat="todo in todos | filter:statusFilter" ng-class="{completed : todo.completed, editing: todo.editing}" ng-dblclick="todo.editing = true">
-              <div class="view">
-                <input type="checkbox" class="toggle" ng-model="todo.completed">
-                <label>{{todo.name}}</label>
-                <button class="destroy" ng-click="removeTodo($index)"></button>
-              </div>
-              <form action="#">
-                <input class="edit" ng-model="todo.name" ng-blur="editTodo(todo)">
-              </form>
-            </li>
-          </ul>
-        </section> <!-- end div main -->
+                    <form class="todo-form" ng-submit="addClothe()">
+             		<input type="text" class="new-todo" placeholder="Ajouter un nouvel objet" autofocus autocomplete="off" ng-model="newClothe">
+                    </form>
+                </header>
 
-		<div id="footer">
-			<span id="todo-count"><strong>{{remaining}}</strong> tâches restantes</span>
-            <ul id="filters">
-                <li><a href="#/" ng-class="{selected: location.path() == '/'}" class="selected">Toutes</a></li>
-                <li><a href="#/active" ng-class="{selected: location.path() == '/active'}">Active</a></li>
-                <li><a href="#done" ng-class="{selected: location.path() == '/done'}">Mis dans la valise</a></li>
-            </ul>
-		</div>
-	</section> <!-- end section todoapp -->
+                <section class="main">
+                    <ul class="todo-list">
+                        <li ng-repeat="clothe in clothesList | filter:clotheFilter | filter:seasonValue | filter:sexe" ng-class="{completed : clothe.completed, editing: clothe.editing}" ng-dblclick="clothe.editing = true">
+                            <div class="view">
+                                <input type="checkbox" class="toggle" ng-model="clothe.completed">
+                                <label>{{clothe.name}}</label>
+                                <button class="destroy" ng-click="removeClothe($index)"></button>
+                            </div>
+                            <form action="#">
+                                <input class="edit" ng-model="clothe.name" ng-blur="editClothe(clothe)">
+                            </form>
+                        </li>
+                    </ul>
+                </section> <!-- end div main -->
 
+                <footer class="footer">
+                    <span class="todo-count"><strong>{{remainingClothes}}</strong> objet(s)</span>
+                    <ul class="filters">
+                        <li><a href="" class="selected" ng-click="clotheFilter = null">Toutes</a></li>
+                        <li><a href="" ng-click="clotheFilter = { completed: false }">A mettre</a></li>
+                        <li><a href="" ng-click="clotheFilter = { completed: true }">Mis dans la valise</a></li>
+                    </ul>
+                </footer>
+            </div> <!-- end div col-md-6 -->
 
+            <div class="col-md-6">
+                <header class="header">
+                    <h2>Trousse de toilettes</h2>
+                    <form class="todo-form" ng-submit="addToiletrie()">
+                        <input type="text" class="new-todo" placeholder="Ajouter un nouvel objet" autofocus autocomplete="off" ng-model="newToiletrie">
+                    </form>
+                </header>
 
+                <section class="main">
+                    <ul class="todo-list">
+                        <li ng-repeat="toiletrie in toiletriesList | filter:toiletrieFilter | filter:sexe" ng-class="{completed : toiletrie.completed, editing: toiletrie.editing}" ng-dblclick="toiletrie.editing = true">
+                            <div class="view">
+                                <input type="checkbox" class="toggle" ng-model="toiletrie.completed">
+                                <label>{{toiletrie.name}}</label>
+                                <button class="destroy" ng-click="removeToiletrie($index)"></button>
+                            </div>
+                            <form action="#">
+                                <input class="edit" ng-model="toiletrie.name" ng-blur="editToiletrie(toiletrie)">
+                            </form>
+                        </li>
+                    </ul>
+                </section> <!-- end div main -->
 
-
-
-            Search: <input ng-model="trousse">
-            <ul>
-                <li ng-repeat="element in elements track by $index | filter:statusFilter" ng-class="{completed : todo.completed, editing: todo.editing}" ng-dblclick="todo.editing = true" | orderBy:orderProp">
-                    <input type="checkbox" ng-checked="cocher" ng-model="element.value"> {{element.name}} <button ng-click="supr(elements, $index)">Supr</button>
-                </li>
-            </ul>
-            <input type="text" id="add" ng-model="itemName"></input>
-            <button ng-click="addItem(elements)" class="btn btn-success">Ajouter</button></br>
-            <button type="button" class="btn btn-danger">Supprimer</button>
-            <button type="button" class="btn btn-info">Enregistrer</button>
-        </div>
-
-
-
-
-
-
-
-
-
-        <div class="col-md-6">
-            <h3>Vetements</h3>
-	    <section id="todoapp">
-		<div id="header">
-			<form id="todo-form" ng-submit="addTodo()">
-            <input type="text" id="new-todo" placeholder="Ajouter un nouvel objet..." autofocus autocomplete="off" ng-model="newtodo">
-          </form>
-        </div>
-
-        <section id="main">
-          <input type="checkbox" id="toggle-all" ng-model="allchecked" ng-click="checkAllTodo(allchecked)">
-          <ul id="todo-list">
-            <li ng-repeat="todo in todos | filter:statusFilter" ng-class="{completed : todo.completed, editing: todo.editing}" ng-dblclick="todo.editing = true">
-              <div class="view">
-                <input type="checkbox" class="toggle" ng-model="todo.completed">
-                <label>{{todo.name}}</label>
-                <button class="destroy" ng-click="removeTodo($index)"></button>
-              </div>
-              <form action="#">
-                <input class="edit" ng-model="todo.name" ng-blur="editTodo(todo)">
-              </form>
-            </li>
-          </ul>
-        </section> <!-- end div main -->
-
-		<div id="footer">
-			<span id="todo-count"><strong>{{remaining}}</strong> tâches restantes</span>
-            <ul id="filters">
-                <li><a href="#/" ng-class="{selected: location.path() == '/'}" class="selected">Toutes</a></li>
-                <li><a href="#/active" ng-class="{selected: location.path() == '/active'}">Active</a></li>
-                <li><a href="#done" ng-class="{selected: location.path() == '/done'}">Mis dans la valise</a></li>
-            </ul>
-		</div>
-	</section> <!-- end section todoapp -->
-        </div>
-    </div>
+                <footer class="footer">
+                    <span class="todo-count"><strong>{{remainingToiletries}}</strong> objet(s)</span>
+                    <ul class="filters">
+                        <li><a href="" class="selected" ng-click="toiletrieFilter = null">Toutes</a></li>
+                        <li><a href="" ng-click="toiletrieFilter = { completed: false }">A mettre</a></li>
+                        <li><a href="" ng-click="toiletrieFilter = { completed: true }">Mis dans la valise</a></li>
+                    </ul>
+                </footer>
+            </div><!-- end div col-md-6 -->
+        </section> <!-- end section todoapp -->
+    </div> <!-- end div row -->
+</div> <!-- end div container-fluid -->
+</div>
 </div>

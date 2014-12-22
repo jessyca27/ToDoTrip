@@ -26,12 +26,28 @@ var todotripApp = angular.module('todoTrip.information', ['ngRoute'])
             $scope.toiletriesList = data;
         });
 
+	$http.get('data/season.json').success(function (data) {
+            $scope.seasonsList = data;
+        });
+
+	$http.get('data/sexe.json').success(function (data) {
+            $scope.sexesList = data;
+        });
+
         $scope.$watch('clothesList', function(){
             $scope.remainingClothes = filterFilter($scope.clothesList, {completed:false}).length;
         }, true);
 
         $scope.$watch('toiletriesList', function(){
             $scope.remainingToiletries = filterFilter($scope.toiletriesList, {completed:false}).length;
+        }, true);
+
+	$scope.$watch('seasonsList', function(){
+            $scope.remainingSasons = filterFilter($scope.seasonsList, {completed:false}).length;
+        }, true);
+
+	$scope.$watch('sexesList', function(){
+            $scope.remainingSexes = filterFilter($scope.sexesList, {completed:false}).length;
         }, true);
 
         $scope.removeClothe = function(index){
