@@ -16,6 +16,7 @@ var todotripApp = angular.module('todoTrip.information', ['ngRoute'])
 
         $scope.clothesList = [];
         $scope.toiletriesList = [];
+	$scope.activitiesList = [];
         $scope.placeholder = "Nouvel élément";
 
         $http.get('data/clothes.json').success(function(data){
@@ -34,6 +35,18 @@ var todotripApp = angular.module('todoTrip.information', ['ngRoute'])
             $scope.sexesList = data;
         });
 
+	$http.get('data/activites.json').success(function (data) {
+            $scope.activitiesList = data;
+        });
+
+	$http.get('data/villes.json').success(function (data) {
+       	    $scope.villesList = data;
+        });
+
+	$http.get('data/typesActivites.json').success(function (data) {
+       	    $scope.typesList = data;
+        });
+
         $scope.$watch('clothesList', function(){
             $scope.remainingClothes = filterFilter($scope.clothesList, {completed:false}).length;
         }, true);
@@ -42,12 +55,8 @@ var todotripApp = angular.module('todoTrip.information', ['ngRoute'])
             $scope.remainingToiletries = filterFilter($scope.toiletriesList, {completed:false}).length;
         }, true);
 
-	$scope.$watch('seasonsList', function(){
-            $scope.remainingSasons = filterFilter($scope.seasonsList, {completed:false}).length;
-        }, true);
-
-	$scope.$watch('sexesList', function(){
-            $scope.remainingSexes = filterFilter($scope.sexesList, {completed:false}).length;
+	$scope.$watch('activitiesList', function(){
+            $scope.remainingActivities = filterFilter($scope.activitiesList, {completed:false}).length;
         }, true);
 
         $scope.removeClothe = function(index){
@@ -56,6 +65,10 @@ var todotripApp = angular.module('todoTrip.information', ['ngRoute'])
 
         $scope.removeToiletrie = function(index){
             $scope.toiletriesList.splice(index,1);
+        };
+
+        $scope.removeActivity = function(index){
+            $scope.activitiesList.splice(index,1);
         };
 
         $scope.addClothe = function(){
@@ -76,11 +89,24 @@ var todotripApp = angular.module('todoTrip.information', ['ngRoute'])
             return false;
         };
 
+        $scope.addActivity = function(){
+            $scope.activitiesList.push({
+                name : $scope.newActivity,
+                completed : false
+            });
+            $scope.newActivity = null;
+            return false;
+        };
+
         $scope.editClothe = function(clothe){
             clothe.editing = false;
         };
 
         $scope.editToiletrie = function(toiletrie){
             toiletrie.editing = false;
+        };
+
+	$scope.editActivity = function(activity){
+            activity.editing = false;
         };
     });

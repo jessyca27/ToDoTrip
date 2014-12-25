@@ -3,20 +3,20 @@
         <section id="todoapp">
             <h1>Vous avez besoin de... </h1>
 
-<div id="Filtres">
-	<button ng-click="sexe = sexesList[0].name">Fille</button>
-	<button ng-click="sexe = sexesList[1].name">Garçon</button>
-	<button ng-click="sexe = null">Supprimer</button></br>
-	<span>{{sexe}}</span></br>
+<div id="filtres">
+		<button ng-click="sexe = sexesList[0].name">Fille</button>
+		<button ng-click="sexe = sexesList[1].name">Garçon</button>
+		<button ng-click="sexe = null">Supprimer</button></br>
+		<span>{{sexe}}</span></br>
 
-	<button ng-click="seasonValue = seasonsList[0].name">Printemps</button>
-	<button ng-click="seasonValue = seasonsList[2].name">Eté</button>
-	<button ng-click="seasonValue = seasonsList[1].name">Automne</button>
-	<button ng-click="seasonValue = seasonsList[3].name">Hiver</button>
-	<button ng-click="seasonValue = null">Supprimer</button></br>
-	<span>{{seasonValue}}</span></br>
+		<button ng-click="seasonValue = seasonsList[0].name">Printemps</button>
+		<button ng-click="seasonValue = seasonsList[2].name">Eté</button>
+		<button ng-click="seasonValue = seasonsList[1].name">Automne</button>
+		<button ng-click="seasonValue = seasonsList[3].name">Hiver</button>
+		<button ng-click="seasonValue = null">Supprimer</button></br>
+		<span>{{seasonValue}}</span></br>
 </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <header class="header">
                     <h2>Liste de vêtements</h2>
 
@@ -27,7 +27,7 @@
 
                 <section class="main">
                     <ul class="todo-list">
-                        <li ng-repeat="clothe in clothesList | filter:clotheFilter | filter:seasonValue | filter:sexe" ng-class="{completed : clothe.completed, editing: clothe.editing}" ng-dblclick="clothe.editing = true">
+                        <li ng-repeat="clothe in filterClothes = (clothesList |filter:filterExpr | filter:clotheFilter | filter:seasonValue | filter:sexe" ng-class="{completed : clothe.completed, editing: clothe.editing}" ng-dblclick="clothe.editing = true">
                             <div class="view">
                                 <input type="checkbox" class="toggle" ng-model="clothe.completed">
                                 <label>{{clothe.name}}</label>
@@ -41,16 +41,16 @@
                 </section> <!-- end div main -->
 
                 <footer class="footer">
-                    <span class="todo-count"><strong>{{remainingClothes}}</strong> objet(s)</span>
+                    <span class="todo-count"><strong>{{filterClothes.length}}</strong> objet(s)</span>
                     <ul class="filters">
                         <li><a href="" class="selected" ng-click="clotheFilter = null">Toutes</a></li>
                         <li><a href="" ng-click="clotheFilter = { completed: false }">A mettre</a></li>
                         <li><a href="" ng-click="clotheFilter = { completed: true }">Mis dans la valise</a></li>
                     </ul>
                 </footer>
-            </div> <!-- end div col-md-6 -->
+            </div> <!-- end div col-md-4 -->
 
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <header class="header">
                     <h2>Trousse de toilettes</h2>
                     <form class="todo-form" ng-submit="addToiletrie()">
@@ -60,7 +60,7 @@
 
                 <section class="main">
                     <ul class="todo-list">
-                        <li ng-repeat="toiletrie in toiletriesList | filter:toiletrieFilter | filter:sexe" ng-class="{completed : toiletrie.completed, editing: toiletrie.editing}" ng-dblclick="toiletrie.editing = true">
+                        <li ng-repeat="toiletrie  in filterToiletries = (toiletriesList |filter:filterExpr | filter:toiletrieFilter | filter:sexe)" ng-class="{completed : toiletrie.completed, editing: toiletrie.editing}" ng-dblclick="toiletrie.editing = true">
                             <div class="view">
                                 <input type="checkbox" class="toggle" ng-model="toiletrie.completed">
                                 <label>{{toiletrie.name}}</label>
@@ -74,14 +74,49 @@
                 </section> <!-- end div main -->
 
                 <footer class="footer">
-                    <span class="todo-count"><strong>{{remainingToiletries}}</strong> objet(s)</span>
+                    <span class="todo-count"><strong>{{filterToiletries.length}}</strong> objet(s)</span>
                     <ul class="filters">
                         <li><a href="" class="selected" ng-click="toiletrieFilter = null">Toutes</a></li>
                         <li><a href="" ng-click="toiletrieFilter = { completed: false }">A mettre</a></li>
                         <li><a href="" ng-click="toiletrieFilter = { completed: true }">Mis dans la valise</a></li>
                     </ul>
                 </footer>
-            </div><!-- end div col-md-6 -->
+            </div><!-- end div col-md-4 -->
+
+
+	<div class="col-md-4">
+                <header class="header">
+                    <h2>Activités</h2>
+                    <form class="todo-form" ng-submit="addActivity()">
+                        <input type="text" class="new-todo" placeholder="Ajouter une nouvelle activité" autofocus autocomplete="off" ng-model="newActivity">
+                    </form>
+                </header>
+
+                <section class="main">
+                    <ul class="todo-list">
+                        <li ng-repeat="activity in filtered = (activitiesList |filter:filterExpr | filter:activityFilter | filter:idRegion)" ng-class="{completed : activity.completed, editing: activity.editing}" ng-dblclick="activity.editing = true">
+                            <div class="view">
+                                <input type="checkbox" class="toggle" ng-model="activity.completed">
+                                <label>{{activity.name}}</label>
+                                <h6>{{activity.ville}}</h6>
+                                <button class="destroy" ng-click="removeActivity($index)"></button>
+                            </div>
+                            <form action="#">
+                                <input class="edit" ng-model="activity.name" ng-blur="editActivity(activity)">
+                            </form>
+                        </li>
+                    </ul>
+                </section> <!-- end div main -->
+
+                <footer class="footer">
+                    <span class="todo-count"><strong>{{filtered.length}}</strong> objet(s)</span>
+                    <ul class="filters">
+                        <li><a href="" class="selected" ng-click="activityFilter = null">Toutes</a></li>
+                        <li><a href="" ng-click="activityFilter = { completed: false }">A Faire</a></li>
+                        <li><a href="" ng-click="activityFilter = { completed: true }">Fait</a></li>
+                    </ul>
+                </footer>
+            </div><!-- end div col-md-4 -->
         </section> <!-- end section todoapp -->
     </div> <!-- end div row -->
 </div> <!-- end div container-fluid -->
