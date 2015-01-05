@@ -27,7 +27,7 @@ angular.module('todoTrip.maps', ['ngRoute'])
                     + '" || Id : "'
                     + code
                     + '"';
-                $window.location.href = '#/information/'+code;
+                $window.location.href = '#/information/'+code+'/'+region;
             }
         });
 }]);
