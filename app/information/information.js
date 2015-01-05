@@ -17,7 +17,7 @@ var todotripApp = angular.module('todoTrip.information', ['ngRoute'])
 
         $scope.clothesList = [];
         $scope.toiletriesList = [];
-	$scope.activitiesList = [];
+        $scope.activitiesList = [];
         $scope.placeholder = "Nouvel élément";
 
         $http.get('data/clothes.json').success(function(data){
@@ -28,20 +28,20 @@ var todotripApp = angular.module('todoTrip.information', ['ngRoute'])
             $scope.toiletriesList = data;
         });
 
-	$http.get('data/season.json').success(function (data) {
+        $http.get('data/season.json').success(function (data) {
             $scope.seasonsList = data;
         });
 
-	$http.get('data/sexe.json').success(function (data) {
+        $http.get('data/sexe.json').success(function (data) {
             $scope.sexesList = data;
         });
 
-	$http.get('data/activites.json').success(function (data) {
+        $http.get('data/activites.json').success(function (data) {
             $scope.activitiesList = data;
         });
 
-	$http.get('data/typesActivites.json').success(function (data) {
-       	    $scope.typesList = data;
+        $http.get('data/typesActivites.json').success(function (data) {
+            $scope.typesList = data;
         });
 
         $scope.removeClothe = function(index){
@@ -91,7 +91,7 @@ var todotripApp = angular.module('todoTrip.information', ['ngRoute'])
             toiletrie.editing = false;
         };
 
-	$scope.editActivity = function(activity){
+        $scope.editActivity = function(activity){
             activity.editing = false;
         };
     });
