@@ -3,35 +3,40 @@
         <section id="todoapp">
             <h1>{{nomRegion}} : Vous avez besoin de...</h1>
 
-<div id="filtres">
-	<button ng-click="sexe = sexesList[0].name"><img src="img/fille.png" alt="Fille" height="20" width="20"></button>
-	<button ng-click="sexe = sexesList[1].name"><img src="img/garcon.png" alt="Garçon" height="20" width="20"></button>
-	<button ng-click="sexe = null"><img src="img/supprimer.png" alt="Supprimer" height="20" width="20"></button></br>
-	<span>{{sexe}}</span></br>
+            <div id="filtres">
+                <!--<ul>
+                    <li ng-repeat="sexes in sexesList">
+                        <button ng-click="sexe = sexes.name"><img src="{{sexes.img}}" alt="{{sexes.name}}" height="20" width="20"></button>
+                    </li>
+                </ul>-->
+                <button ng-click="sexe = sexesList[0].name"><img src="img/fille.png" alt="Fille" height="20" width="20"></button>
+                <button ng-click="sexe = sexesList[1].name"><img src="img/garcon.png" alt="Garçon" height="20" width="20"></button>
+                <button ng-click="sexe = null"><img src="img/supprimer.png" alt="Supprimer" height="20" width="20"></button></br>
+                <span>{{sexe}}</span></br>
 
-	<button ng-click="seasonValue = seasonsList[0].name"><img src="img/printemps.png" alt="Printemps" height="20" width="20"></button>
-	<button ng-click="seasonValue = seasonsList[2].name"><img src="img/ete.png" alt="Eté" height="20" width="20"></button>
-	<button ng-click="seasonValue = seasonsList[1].name"><img src="img/automne.png" alt="Automne" height="20" width="20"></button>
-	<button ng-click="seasonValue = seasonsList[3].name"><img src="img/hiver.png" alt="Hiver" height="20" width="20"></button>
-	<button ng-click="seasonValue = null"><img src="img/supprimer.png" alt="Supprimer" height="20" width="20"></button></br>
-	<span>{{seasonValue}}</span></br>
+                <button ng-click="seasonValue = seasonsList[0].name"><img src="img/printemps.png" alt="Printemps" height="20" width="20"></button>
+                <button ng-click="seasonValue = seasonsList[2].name"><img src="img/ete.png" alt="Eté" height="20" width="20"></button>
+                <button ng-click="seasonValue = seasonsList[1].name"><img src="img/automne.png" alt="Automne" height="20" width="20"></button>
+                <button ng-click="seasonValue = seasonsList[3].name"><img src="img/hiver.png" alt="Hiver" height="20" width="20"></button>
+                <button ng-click="seasonValue = null"><img src="img/supprimer.png" alt="Supprimer" height="20" width="20"></button></br>
+                <span>{{seasonValue}}</span></br>
 
-	<label>Activités</label>
-	<select name="types" size="1">
-		<option ng-click="typeValue = typesList[0].name"><button>Divertissement</button></option>
-		<option ng-click="typeValue = typesList[2].name"><button>Nature</button></option>
-		<option ng-click="typeValue = typesList[1].name"><button>Sensation</button></option>
-		<option ng-click="typeValue = typesList[3].name"><button>Boite/PUB</button></option>
-	</select>
-	<button ng-click="typeValue = null"><img src="img/supprimer.png" alt="Supprimer" height="20" width="20"></button></br>
-	<span>{{typeValue}}</span></br>
-</div>
+                <label>Activités</label>
+                <select name="types" size="1">
+                    <option ng-click="typeValue = typesList[0].name"><button>Divertissement</button></option>
+                    <option ng-click="typeValue = typesList[2].name"><button>Nature</button></option>
+                    <option ng-click="typeValue = typesList[1].name"><button>Sensation</button></option>
+                    <option ng-click="typeValue = typesList[3].name"><button>Boite/PUB</button></option>
+                </select>
+                <button ng-click="typeValue = null"><img src="img/supprimer.png" alt="Supprimer" height="20" width="20"></button></br>
+                <span>{{typeValue}}</span></br>
+            </div>
             <div class="col-md-4">
                 <header class="header">
                     <h2>Liste de vêtements</h2>
 
                     <form class="todo-form" ng-submit="addClothe()">
-             		<input type="text" class="new-todo" placeholder="Ajouter un nouvel objet" autofocus autocomplete="off" ng-model="newClothe">
+                        <input type="text" class="new-todo" placeholder="Ajouter un nouvel objet" autofocus autocomplete="off" ng-model="newClothe">
                     </form>
                 </header>
 
@@ -94,7 +99,7 @@
             </div><!-- end div col-md-4 -->
 
 
-	<div class="col-md-4">
+            <div class="col-md-4">
                 <header class="header">
                     <h2>Activités</h2>
                     <form class="todo-form" ng-submit="addActivity()">
