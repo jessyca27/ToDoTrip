@@ -10,7 +10,6 @@ var todotripApp = angular.module('todoTrip.information', ['ngRoute'])
     }])
 
     .controller('InformationCtrl', function($scope, filterFilter, $http, $routeParams){
-        $(".jqvmap-label").remove(); // Supprime le tooltip qui restait lorsque l'on change de page
 
         $scope.idRegion = $routeParams.idRegion;
         $scope.nomRegion = $routeParams.nomRegion;
@@ -45,15 +44,17 @@ var todotripApp = angular.module('todoTrip.information', ['ngRoute'])
         });
 
         $scope.removeClothe = function(index){
-            $scope.clothesList.splice(index,1);
+            //$scope.clothesList.splice(index,1);
+            $scope.clothesList.splice( $scope.clothesList.indexOf(index), 1 );
         };
 
         $scope.removeToiletrie = function(index){
-            $scope.toiletriesList.splice(index,1);
+            //$scope.toiletriesList.splice(index,1);
+            $scope.toiletriesList.splice( $scope.toiletriesList.indexOf(index), 1 );
         };
 
         $scope.removeActivity = function(index){
-            $scope.activitiesList.splice(index,1);
+            $scope.activitiesList.splice( $scope.activitiesList.indexOf(index), 1 );
         };
 
         $scope.addClothe = function(){
@@ -75,9 +76,12 @@ var todotripApp = angular.module('todoTrip.information', ['ngRoute'])
         };
 
         $scope.addActivity = function(){
+            console.log($scope.newActivity);
+            console.log($scope.activitiesList);
             $scope.activitiesList.push({
                 name : $scope.newActivity,
-                completed : false
+                completed : false,
+                region : $scope.nomRegion
             });
             $scope.newActivity = null;
             return false;
