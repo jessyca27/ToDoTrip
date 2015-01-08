@@ -98,4 +98,29 @@ var todotripApp = angular.module('todoTrip.information', ['ngRoute','ngFx'])
         $scope.editActivity = function(activity){
             activity.editing = false;
         };
+
+        $scope.generatePDF = function (list, title, filename){
+            var doc = new jsPDF('p','in','a4')
+                , margin = 0.5; // inches on a 8.5 x 11 inch sheet
+            // Margins
+            doc.setLineWidth(1/72)
+                .line(margin, margin, margin, 11 - margin)
+                .line(8.5 - margin, margin, 8.5-margin, 11-margin);
+
+            doc.text(margin + 3, margin, title);
+
+            // List
+            var j = 0;
+            for (var i = 0; i < list.length; i ++) {
+                var selected = list[i].completed ? 'x' : ' ';
+                if (list[i].region != undefined && list[i].region == $scope.nomRegion) {
+                    doc.setDrawColor(14,4,0,0);
+                    doc.text(margin + 1, (margin * j) + 1, '[ ' + selected + ' ] ' + list[i].name);
+                    j++;
+                } else if (list[i].region == undefined) {
+                    doc.text(margin + 1, (margin * i) + 1, '[ ' + selected + ' ] ' + list[i].name);
+                }
+            }
+            doc.save(filename + '.pdf');
+        }
     });

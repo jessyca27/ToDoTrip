@@ -28,7 +28,10 @@
             </div>
             <div class="col-md-4">
                 <header class="header">
-                    <h2>Liste de vêtements</h2>
+                    <div class="header-list">
+                        <h2>Liste de vêtements</h2>
+                        <button type="button" class="btn btn-danger" ng-click="generatePDF(clothesList, 'Liste de vêtements', 'clothesList')">Télécharger</button>
+                    </div>
                     <form class="todo-form" ng-submit="addClothe()">
                         <input type="text" class="new-todo" placeholder="Ajouter un nouvel objet" autofocus autocomplete="off" ng-model="newClothe">
                     </form>
@@ -61,7 +64,10 @@
 
             <div class="col-md-4">
                 <header class="header">
-                    <h2>Trousse de toilettes</h2>
+                    <div class="header-list">
+                        <h2>Trousse de toilettes</h2>
+                        <button type="button" class="btn btn-danger" ng-click="generatePDF(toiletriesList, 'Trousse de toilettes', 'toiletriesList')">Télécharger</button>
+                    </div>
                     <form class="todo-form" ng-submit="addToiletrie()">
                         <input type="text" class="new-todo" placeholder="Ajouter un nouvel objet" autofocus autocomplete="off" ng-model="newToiletrie">
                     </form>
@@ -95,7 +101,10 @@
 
             <div class="col-md-4">
                 <header class="header">
-                    <h2>Activités</h2>
+                    <div class="header-list">
+                        <h2>Activités</h2>
+                        <button type="button" class="btn btn-danger" ng-click="generatePDF(activitiesList, 'Activités', 'activitiesList')">Télécharger</button>
+                    </div>
                     <form class="todo-form" ng-submit="addActivity()">
                         <input type="text" class="new-todo" placeholder="Ajouter une nouvelle activité" autofocus autocomplete="off" ng-model="newActivity">
                     </form>

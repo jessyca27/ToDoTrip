@@ -13,16 +13,24 @@ body {
 	margin-bottom: 20px;
 }
 
+.header-list {
+    border-bottom:5px solid #0080ff;
+}
 
 h2 {
 	color: #339;
 	font-weight: bold;
-	border-bottom:5px solid #0080ff;
 	text-transform: uppercase;
 	font-family: 'Gabriela', serif;
 	letter-spacing: .10em;
+    display: inline;
 }
 
+.btn {
+    display: inline;
+    float: right;
+    margin: 0 20px 30px 20px;
+}
 
 h1 { /** gros titre */
   font-family: serif;        

@@ -8,7 +8,7 @@
     {"name": "Château de versailles", "completed": false, "region": "Île-de-France", "ville": "Paris", "type": ["divertissement"]},
     {"name": "Disneyland Paris", "completed": false, "region": "Île-de-France", "ville": "Marne-la-Vallée", "type": ["divertissement", "sensation"]},
     {"name": "Alignements de Carnac", "completed": false, "region": "Bretagne", "ville": "Carnac", "type": ["divertissement"]},
-    {"name": "Grand aquarium Saint-Malo", "completed": false, "Bretagne": "region", "ville": "Saint-Malo", "type": ["divertissement"]},
+    {"name": "Grand aquarium Saint-Malo", "completed": false, "region": "Bretagne", "ville": "Saint-Malo", "type": ["divertissement"]},
     {"name": "Porte de Mars", "completed": false, "region": "Champagne-Ardenne", "ville": "Reims", "type": ["divertissement"]},
     {"name": "Circuit de Reims-Gueux", "completed": false, "region": "Champagne-Ardenne", "ville": "Reims-Gueux", "type": ["divertissement"]},
     {"name": "Cité de l'automobile", "completed": false, "region": "Alsace", "ville": "Mulhouse", "type": ["divertissement"]},
