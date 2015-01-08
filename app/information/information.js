@@ -10,10 +10,6 @@ var todotripApp = angular.module('todoTrip.information', ['ngRoute','ngFx'])
     }])
 
     .controller('InformationCtrl', function($scope, filterFilter, $http, $routeParams, $timeout){
-	
-		$timeout(function(){
-			$scope.foods = ['apple', 'muffin', 'chips'];
-		}, 2000);
 		
         $scope.idRegion = $routeParams.idRegion;
         $scope.nomRegion = $routeParams.nomRegion;
@@ -24,11 +20,7 @@ var todotripApp = angular.module('todoTrip.information', ['ngRoute','ngFx'])
         $scope.placeholder = "Nouvel élément";
 
         $http.get('data/clothes.json').success(function(data){
-				$timeout(function() {
-					for (var i = 0, l = data.length; i < l; i++) {
-						$scope.clothesList.push(data[i]); 
-					}
-				}, 500);
+			$scope.clothesList = data;
         });
 
         $http.get('data/vanityCase.json').success(function (data) {
