@@ -6,13 +6,15 @@
   "license": "",
   "private": true,
   "dependencies": {
-    "angular": "1.2.x",
+    "angular": "1.3.x",
 	"angular-animate": "latest",
     "angular-route": "1.2.x",
     "angular-loader": "1.2.x",
     "angular-mocks": "~1.2.x",
     "bootstrap": "~3.3.0",
     "jquery": "~2.1.1",
-    "raphael": "~2.1.2"
+    "raphael": "~2.1.2",
+    "jsPDF": "https://github.com/MrRio/jsPDF.git#latest",
+    "ngFx": "latest"
   }
 }

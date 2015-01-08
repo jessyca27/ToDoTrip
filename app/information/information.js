@@ -44,12 +44,10 @@ var todotripApp = angular.module('todoTrip.information', ['ngRoute','ngFx'])
         });
 
         $scope.removeClothe = function(index){
-            //$scope.clothesList.splice(index,1);
             $scope.clothesList.splice( $scope.clothesList.indexOf(index), 1 );
         };
 
         $scope.removeToiletrie = function(index){
-            //$scope.toiletriesList.splice(index,1);
             $scope.toiletriesList.splice( $scope.toiletriesList.indexOf(index), 1 );
         };
 
