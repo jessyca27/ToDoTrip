@@ -34,30 +34,7 @@
 					<li class="col-md-4 filtre">{{typeValue}}<li>
 				</ul>
             </div>
-			
-           <!-- <div id="filtres">				
-                <p>Vous êtes : </p>
-                <button ng-click="sexe = sexesList[0].name"><img src="img/fille.png" alt="Fille" height="20" width="20"></button>
-                <button ng-click="sexe = sexesList[1].name"><img src="img/garcon.png" alt="Garçon" height="20" width="20"></button>
-                <button ng-click="sexe = null"><img src="img/supprimer.png" alt="Supprimer" height="20" width="20"></button></br>
-                <span>{{sexe}}</span></br>
 
-                <p>Saison de votre voyage : </p>
-                <button ng-click="seasonValue = seasonsList[0].name"><img src="img/printemps.png" alt="Printemps" height="20" width="20"></button>
-                <button ng-click="seasonValue = seasonsList[2].name"><img src="img/ete.png" alt="Eté" height="20" width="20"></button>
-                <button ng-click="seasonValue = seasonsList[1].name"><img src="img/automne.png" alt="Automne" height="20" width="20"></button>
-                <button ng-click="seasonValue = seasonsList[3].name"><img src="img/hiver.png" alt="Hiver" height="20" width="20"></button>
-                <button ng-click="seasonValue = null"><img src="img/supprimer.png" alt="Supprimer" height="20" width="20"></button></br>
-                <span>{{seasonValue}}</span></br>
-
-                <p>Activités souhaité : </p>
-                <button ng-click="typeValue = typesList[0].name">Divertissement</button>
-                <button ng-click="typeValue = typesList[2].name">Nature</button>
-                <button ng-click="typeValue = typesList[1].name">Sensation</button>
-                <button ng-click="typeValue = typesList[3].name">Boite/PUB</button>
-                <button ng-click="typeValue = null"><img src="img/supprimer.png" alt="Supprimer" height="20" width="20"></button></br>
-                <span>{{typeValue}}</span></br>
-            </div>-->
             <div class="col-md-4">
                 <header class="header">
                     <div class="header-list">
@@ -74,7 +51,7 @@
 
                 <section class="main">
                     <ul class="todo-list">
-                        <li class='fx-fade-down fx-easing-bounce fx-speed-800' ng-repeat="clothe in filterClothes = (clothesList |filter:filterExpr | filter:clotheFilter | filter:seasonValue | filter:sexe)" ng-class="{completed : clothe.completed, editing: clothe.editing}" ng-dblclick="clothe.editing = true">
+                        <li ng-repeat="clothe in filterClothes = (clothesList |filter:filterExpr | filter:clotheFilter | filter:seasonValue | filter:sexe)" ng-class="{completed : clothe.completed, editing: clothe.editing}" ng-dblclick="clothe.editing = true">
                             <div class="view">
                                 <input type="checkbox" class="toggle" ng-model="clothe.completed">
                                 <label>{{clothe.name}}</label>
@@ -112,7 +89,7 @@
 
                 <section class="main">
                     <ul class="todo-list">
-                        <li class='fx-fade-down fx-easing-bounce fx-speed-800' ng-repeat="toiletrie  in filterToiletries = (toiletriesList |filter:filterExpr | filter:toiletrieFilter | filter:sexe)" ng-class="{completed : toiletrie.completed, editing: toiletrie.editing}" ng-dblclick="toiletrie.editing = true">
+                        <li ng-repeat="toiletrie  in filterToiletries = (toiletriesList |filter:filterExpr | filter:toiletrieFilter | filter:sexe)" ng-class="{completed : toiletrie.completed, editing: toiletrie.editing}" ng-dblclick="toiletrie.editing = true">
                             <div class="view">
                                 <input type="checkbox" class="toggle" ng-model="toiletrie.completed">
                                 <label>{{toiletrie.name}}</label>
@@ -151,7 +128,7 @@
 
                 <section class="main">
                     <ul class="todo-list">
-                        <li class='fx-fade-down fx-easing-bounce fx-speed-800' ng-repeat="activity in filtered = (activitiesList |filter:filterExpr | filter:activityFilter | filter:nomRegion | filter: typeValue)" ng-class="{completed : activity.completed, editing: activity.editing}" ng-dblclick="activity.editing = true">
+                        <li ng-repeat="activity in filtered = (activitiesList |filter:filterExpr | filter:activityFilter | filter:nomRegion | filter: typeValue)" ng-class="{completed : activity.completed, editing: activity.editing}" ng-dblclick="activity.editing = true">
                             <div class="view">
                                 <input type="checkbox" class="toggle" ng-model="activity.completed">
                                 <label>{{activity.name}}</label>
