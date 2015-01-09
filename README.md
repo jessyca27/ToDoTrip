@@ -52,10 +52,6 @@ Vous pouver voir l'application à l'adresse : `http://localhost:8000/app/index.h
 
 ## Idée d'amélioration
 
-### Téléchargement de la liste en PDF
-
-https://github.com/MrRio/jsPDF
-
 ### Ajout d'une base de données
 
 https://www.iriscouch.com/
