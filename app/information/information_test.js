@@ -1,16 +1,33 @@
 'use strict';
 
-describe('myApp.view2 module', function() {
+describe('todoTrip.information module', function() {
 
-  beforeEach(module('myApp.view2'));
+  beforeEach(module('todoTrip.information'));
 
-  describe('view2 controller', function(){
+  describe('InformationCtrl controller', function(){
 
-    it('should ....', inject(function($controller) {
-      //spec body
-      var view2Ctrl = $controller('View2Ctrl');
-      expect(view2Ctrl).toBeDefined();
+    var scope, createController, routeParams, httpBackend, service;
+
+    beforeEach(inject(function ($rootScope, $controller, $httpBackend, $routeParams) {
+      scope = $rootScope.$new();
+      routeParams = $routeParams;
+      httpBackend = $httpBackend;
+
+      /*$httpBackend.when('GET', 'data/clothes.json')
+          .respond(200, {clothesList : "Ok !"});*/
+
+
+      createController = function() {
+        return $controller('InformationCtrl', {
+          '$scope': scope
+        });
+      };
+
     }));
 
+    it('Le controller doit être défini', function() {
+      var controller = createController();
+      expect(controller).toBeDefined();
+    });
   });
 });
